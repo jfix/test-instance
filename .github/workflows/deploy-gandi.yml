@@ -26,7 +26,7 @@ jobs:
       uses: shimataro/ssh-key-action@v2
       with:
          key: ${{ secrets.SSH_PRIVATE_KEY }}
-         known_hosts: ${{ secrets.KNOWN_HOSTS_S5 }}
+         known_hosts: ${{ secrets.KNOWN_HOSTS_SD5 }}
 
     # set Git config
     - run: git config --global user.email "jakob.fix@gmail.com"
