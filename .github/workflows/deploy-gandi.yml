@@ -34,14 +34,14 @@ jobs:
     - run: git config --global user.name "Jakob Fix"
 
     # Add Gandi remote and push
-    - run: git remote add gandi git+ssh://4748832@git.sd5.gpaas.net/default.git
+    - run: git remote add gandi git+ssh://4748832@git.sd5.gpaas.net/8f70018c4bab4ed3a3cf2a23224dde85.testmyurl.ws.git
     - run: git push gandi main -f
 
     # Runs SSH Clean on Gandi
     - name: Run SSH clean
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command: clean default.git
+        command: clean 8f70018c4bab4ed3a3cf2a23224dde85.testmyurl.ws.git
         host: git.sd5.gpaas.net
         username: 4748832
         privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -50,7 +50,7 @@ jobs:
     - name: Run SSH deploy
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command: deploy default.git
+        command: deploy 8f70018c4bab4ed3a3cf2a23224dde85.testmyurl.ws.git
         host: git.sd5.gpaas.net
         username: 4748832
         privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
