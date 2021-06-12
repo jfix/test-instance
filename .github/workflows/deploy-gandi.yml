@@ -21,6 +21,10 @@ jobs:
       with:
         fetch-depth: '0'
         ref: 'main'
+
+    - name: Replace a string
+      run: sed -i 's/__TOKEN__/${{ secrets.TOKEN }}/g' index.html
+
     # install SSH key
     - name: Install SSH key
       uses: shimataro/ssh-key-action@v2
