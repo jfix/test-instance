@@ -13,6 +13,9 @@ jobs:
   build:
     env:
       GANDI_ID: 4748832
+      GANDI_HOST: git.sd5.gpaas.net
+      # to be replaced with the real projects home directory on Gandi, like [vhosts/]oe.cd[/htdocs]
+      GANDI_REPO: 8f70018c4bab4ed3a3cf2a23224dde85.testmyurl.ws
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -40,33 +43,33 @@ jobs:
     - run: git config --global user.name "Jakob Fix"
 
     # Add Gandi remote and push
-    - run: git remote add gandi git+ssh://${{ env.GANDI_ID }}@git.sd5.gpaas.net/8f70018c4bab4ed3a3cf2a23224dde85.testmyurl.ws.git
+    - run: git remote add gandi git+ssh://${{ env.GANDI_ID }}@${{ env.GANDI_HOST }}/${{ env.GANDI_REPO }}.git
     - run: git push -v gandi main -f
 
     # Runs SSH Clean on Gandi
     - name: Run SSH clean
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command: clean 8f70018c4bab4ed3a3cf2a23224dde85.testmyurl.ws.git
-        host: git.sd5.gpaas.net
+        command: clean ${{ env.GANDI_REPO }}.git
+        host: ${{ env.GANDI_HOST }}
         username: ${{ env.GANDI_ID }}
         privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
 
     - name: Copy .env to remote server
       uses: Creepios/sftp-action@v1.0.1
       with:
-        host: git.sd5.gpaas.net
+        host: ${{ env.GANDI_HOST }}
         port: 22
         username: ${{ env.GANDI_ID }}
         privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
         localPath: '.env'
-        remotePath: './vhosts/8f70018c4bab4ed3a3cf2a23224dde85.testmyurl.ws/.env'
+        remotePath: './vhosts/${{ env.GANDI_REPO }}/.env'
 
     # Runs SSH Deploy on Gandi
     - name: Run SSH deploy
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command: deploy 8f70018c4bab4ed3a3cf2a23224dde85.testmyurl.ws.git main
-        host: git.sd5.gpaas.net
+        command: deploy ${{ env.GANDI_REPO }}.git main
+        host: ${{ env.GANDI_HOST }}
         username: ${{ env.GANDI_ID }}
         privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
