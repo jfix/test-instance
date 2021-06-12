@@ -53,7 +53,7 @@ jobs:
       uses: garygrossgarten/github-action-scp@release
       with:
         local: .env
-        remote: .env
+        remote: 8f70018c4bab4ed3a3cf2a23224dde85.testmyurl.ws/.env
         host: git.sd5.gpaas.net
         username: 4748832
         privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
