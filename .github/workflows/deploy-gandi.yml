@@ -22,8 +22,8 @@ jobs:
         fetch-depth: '0'
         ref: 'main'
     - run: |
-        cat ${{ secrets.DB_USER }} > .env
-        cat ${{ secrets.DB_PASSWORD }} >> .env
+        echo ${{ secrets.DB_USER }} > .env
+        echo ${{ secrets.DB_PASSWORD }} >> .env
 
     # install SSH key
     - name: Install SSH key
