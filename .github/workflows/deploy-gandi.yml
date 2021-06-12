@@ -22,7 +22,7 @@ jobs:
         fetch-depth: '0'
         ref: 'main'
     - run: |
-        echo "DB_USER = ${{ secrets.DB_USER }}"" > .env
+        echo "DB_USER = ${{ secrets.DB_USER }}" > .env
         echo "DB_PASSWORD = ${{ secrets.DB_PASSWORD }}" >> .env
 
     # install SSH key
