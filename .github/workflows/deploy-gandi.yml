@@ -26,7 +26,6 @@ jobs:
       uses: shimataro/ssh-key-action@v2
       with:
          key: ${{ secrets.SSH_PRIVATE_KEY }}
-         name: id_rsa # optional
          known_hosts: ${{ secrets.KNOWN_HOSTS_SD5 }}
 
     # set Git config
@@ -35,7 +34,7 @@ jobs:
 
     # Add Gandi remote and push
     - run: git remote add gandi git+ssh://4748832@git.sd5.gpaas.net/8f70018c4bab4ed3a3cf2a23224dde85.testmyurl.ws.git
-    - run: git push gandi main -f
+    - run: git push -v gandi main -f
 
     # Runs SSH Clean on Gandi
     - name: Run SSH clean
