@@ -34,6 +34,7 @@ jobs:
 
     # Add Gandi remote and push
     - run: git remote add gandi git+ssh://4748832@git.sd5.gpaas.net/8f70018c4bab4ed3a3cf2a23224dde85.testmyurl.ws.git
+    - run: git remote -v
     - run: git push -v gandi main -f
 
     # Runs SSH Clean on Gandi
