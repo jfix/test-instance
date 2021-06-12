@@ -50,7 +50,7 @@ jobs:
     - name: Run SSH deploy
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command: deploy 8f70018c4bab4ed3a3cf2a23224dde85.testmyurl.ws.git
+        command: deploy 8f70018c4bab4ed3a3cf2a23224dde85.testmyurl.ws.git main
         host: git.sd5.gpaas.net
         username: 4748832
         privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
