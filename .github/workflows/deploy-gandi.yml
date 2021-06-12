@@ -50,13 +50,14 @@ jobs:
         privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
 
     - name: Copy .env to remote server
-      uses: wlixcc/SFTP-Deploy-Action@v1.0
+      uses: Creepios/sftp-action@v1.0.1
       with:
+        host: git.sd5.gpaas.net
+        port: 22
         username: 4748832
-        server: git.sd5.gpaas.net
-        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
-        local_path: .env
-        remote_path: vhosts/8f70018c4bab4ed3a3cf2a23224dde85.testmyurl.ws/.env
+        privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
+        localPath: '.env'
+        remotePath: './vhosts/8f70018c4bab4ed3a3cf2a23224dde85.testmyurl.ws/.env'
 
     # Runs SSH Deploy on Gandi
     - name: Run SSH deploy
