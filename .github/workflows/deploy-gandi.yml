@@ -1,0 +1,56 @@
+name: Test deploy
+
+# Deploy on main update
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out main
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
+        ref: 'main'
+    # install SSH key
+    - name: Install SSH key
+      uses: shimataro/ssh-key-action@v2
+      with:
+         key: ${{ secrets.SSH_PRIVATE_KEY }}
+         name: id_rsa # optional
+         known_hosts: ${{ secrets.KNOWN_HOSTS_SD5 }}
+
+    # set Git config
+    - run: git config --global user.email "jakob.fix@gmail.com"
+    - run: git config --global user.name "Jakob Fix"
+
+    # Add Gandi remote and push
+    - run: git remote add gandi git+ssh://4748832@git.sd5.gpaas.net/default.git
+    - run: git push gandi main -f
+
+    # Runs SSH Clean on Gandi
+    - name: Run SSH clean
+      uses: garygrossgarten/github-action-ssh@release
+      with:
+        command: clean default.git
+        host: git.sd5.gpaas.net
+        username: 4748832
+        privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    # Runs SSH Deploy on Gandi
+    - name: Run SSH deploy
+      uses: garygrossgarten/github-action-ssh@release
+      with:
+        command: deploy default.git
+        host: git.sd5.gpaas.net
+        username: 4748832
+        privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
