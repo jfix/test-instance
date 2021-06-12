@@ -54,7 +54,7 @@ jobs:
       with:
         local: .env
         remote: .env
-        host: ${{ secrets.HOST }}
+        host: git.sd5.gpaas.net
         username: 4748832
         privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
 
