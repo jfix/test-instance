@@ -49,6 +49,15 @@ jobs:
         username: 4748832
         privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
 
+    - name: Copy .env to remote server
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        local: .env
+        remote: .env
+        host: ${{ secrets.HOST }}
+        username: 4748832
+        privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
+
     # Runs SSH Deploy on Gandi
     - name: Run SSH deploy
       uses: garygrossgarten/github-action-ssh@release
