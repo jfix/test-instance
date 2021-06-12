@@ -23,7 +23,7 @@ jobs:
         ref: 'main'
 
     - name: Replace a string
-      run: sed -i 's/__TOKEN__/${{ secrets.TOKEN }}/g' index.html
+      run: sed -i 's/__TOKEN__/${{ secrets.TOKEN }}/g' htdocs/index.html
 
     # install SSH key
     - name: Install SSH key
