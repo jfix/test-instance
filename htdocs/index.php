@@ -5,7 +5,7 @@
     $dotenv->required(['A', 'B', 'C']);
 ?>
 <html>
-<h1>Hello PHP!</h1>
+<h1>Environment variable test</h1>
 <br/> A <?php var_dump( $_ENV['A'] ); ?>
 <br/> B <?php var_dump( $_ENV['B'] ); ?>
 <br/> C <?php var_dump( $_ENV['C'] ); ?>
