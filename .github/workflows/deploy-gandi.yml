@@ -27,17 +27,17 @@ jobs:
         fetch-depth: '0'
         ref: 'main'
     - run: |
-        echo "DB_USER={{ secrets.DB_USER }}" >> .env
-        echo "DB_PASS={{ secrets.DB_PASS }}" >> .env
-        echo "DB_NAME={{ secrets.DB_NAME }}" >> .env
-        echo "DB_HOST={{ secrets.DB_HOST }}" >> .env
-        echo "DB_PREFIX={{ secrets.DB_PREFIX }}" >> .env
-        echo "SITE={{ secrets.SITE_OECD_IO }}" >> .env
-        echo "COOKIEKEY={{ secrets.COOKIEKEY }}" >> .env
-        echo "FLOOD_IP_WHITELIST={{ secrets.FLOOD_IP_WHITELIST }}" >> .env
-        echo "ADMIN_USER={{ secrets.ADMIN_USER }}" >> .env
-        echo "ADMIN_PASS={{ secrets.ADMIN_PASS }}" >> .env
-        echo "AUTH_IPS={{ secrets.AUTH_IPS }}" >> .env
+        echo "DB_USER=${{ secrets.DB_USER }}" >> .env
+        echo "DB_PASS=${{ secrets.DB_PASS }}" >> .env
+        echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
+        echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+        echo "DB_PREFIX=${{ secrets.DB_PREFIX }}" >> .env
+        echo "SITE=${{ secrets.SITE_OECD_IO }}" >> .env
+        echo "COOKIEKEY=${{ secrets.COOKIEKEY }}" >> .env
+        echo "FLOOD_IP_WHITELIST=${{ secrets.FLOOD_IP_WHITELIST }}" >> .env
+        echo "ADMIN_USER=${{ secrets.ADMIN_USER }}" >> .env
+        echo "ADMIN_PASS=${{ secrets.ADMIN_PASS }}" >> .env
+        echo "AUTH_IPS=${{ secrets.AUTH_IPS }}" >> .env
 
     # install SSH key
     - name: Install SSH key
