@@ -1,0 +1,30 @@
+# BEGIN YOURLS
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+
+    # BEGIN HTTPS
+        # Activate only on Gandi Simple Hosting with a valid certificate
+        RewriteCond %{REQUEST_SCHEME} =http
+		RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+    # END HTTPS
+
+    # BEGIN Without WWW
+        RewriteCond %{HTTP_HOST} ^www\.oecd\.io$ [NC]
+        RewriteRule ^(.*)$ http://oecd.io/$1 [R=301,L]
+    # END Without WWW
+
+    # YOURLS related URLs
+        RewriteCond %{REQUEST_URI} ^/admin [OR]
+        RewriteCond %{REQUEST_URI} ^/js [OR]
+        RewriteCond %{REQUEST_URI} ^/css [OR]
+        RewriteCond %{REQUEST_URI} ^/images
+        RewriteRule ^(.*)$ /yourls/$1 [L]
+
+    # Here is the actual redirection of links 
+        RewriteBase /yourls/
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteRule ^(.*)$ /yourls/yourls-loader.php [L]
+</IfModule>
+# END YOURLS
+

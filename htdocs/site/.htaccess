@@ -1,0 +1,8 @@
+# Hide .php extension on client (request with extension will still work)
+RewriteEngine On
+RewriteRule ^api$ api.php [L]
+RewriteRule ^batch$ batch.php [L]
+RewriteRule ^help$ help.php [L]
+
+# Do not expose this file, or even acknowledge its existence
+RewriteRule functions.php - [R=404,L]
